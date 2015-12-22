@@ -47,8 +47,8 @@ public:
     Double_t Px(Int_t k, Bool_t kind = 0);        // inline
     Double_t Py(Int_t k, Bool_t kind = 0);        // inline
     Double_t Pz(Int_t k, Bool_t kind = 0);        // inline
-    Double_t X(Int_t k);                          // inline
-    Double_t Y(Int_t k);                          // inline
+    Double_t X(Int_t k, Bool_t kind = 0);         // inline
+    Double_t Y(Int_t k, Bool_t kind = 0);         // inline
     Double_t Z(Int_t k, Bool_t kind = 0);         // inline
     Int_t StatCC(Int_t k);                        // inline
     Int_t StatSC(Int_t k);                        // inline
@@ -68,12 +68,16 @@ public:
     Double_t Etot(Int_t k);                       // inline
     Double_t Ein(Int_t k);                        // inline
     Double_t Eout(Int_t k);                       // inline
+    Double_t EChit_Moment2(Int_t k);              // inline
+    Double_t EChit_Moment3(Int_t k);              // inline
+    Double_t EChit_Moment4(Int_t k);              // inline
+    Double_t Chi2EC(Int_t k);                     // inline
     Double_t ECStatus(Int_t k);                   // inline
-    Float_t XEC(Int_t k);                         // inline // osoto add
-    Float_t YEC(Int_t k);                         // inline // osoto add
-    Float_t ZEC(Int_t k);                         // inline // osoto add
-    Float_t TimeEC(Int_t k);                      // inline // osoto add
-    Float_t PathEC(Int_t k);                      // inline // osoto add
+    Float_t XEC(Int_t k);                         // inline
+    Float_t YEC(Int_t k);                         // inline
+    Float_t ZEC(Int_t k);                         // inline
+    Float_t TimeEC(Int_t k);                      // inline
+    Float_t PathEC(Int_t k);                      // inline
 
     // SCPB
     Double_t PathSC(Int_t k);                     // inline
@@ -95,6 +99,8 @@ public:
     Double_t PTrans2PQ(Int_t k, Bool_t kind = 0);
     Double_t PLong2PQ(Int_t k, Bool_t kind = 0);
     Int_t Sector(Int_t k, Bool_t kind = 0);
+    TVector3 *XYZToUVW(TVector3 *xyz);
+
 	 //Added in hayk's code
     Double_t Pt2(Int_t, Bool_t = 0);
     Double_t Pl2(Int_t, Bool_t = 0);
@@ -118,8 +124,7 @@ public:
 
     // Correction functions
     Double_t TimeCorr4(Double_t mass, Int_t k);
-    TVector3 *GetCorrectedVert();
-
+    TVector3 *GetCorrectedVert();  
 
 	 //Added in hayk's code
 	 //Int_t ElecVertTarg(Bool_t = 0);
@@ -127,7 +132,6 @@ public:
     // Particle Identification cuts
     TString GetCategorization(Int_t k);
     TString GetCategorizationOld(Int_t k);
-    TString GetCategorizationMin(Int_t k); 
     TString* GetCategorization();
     void PrintCategorization();
     void PrintCategorization(TString* partIds);
@@ -151,10 +155,6 @@ public:
     Int_t ElecVertTarg();
     Int_t ElecVertTarg(Bool_t kind);
     Bool_t PionVertTarg(Int_t k);
-
-    //Other methods.
-    TVector3 *XYZToUVW(TVector3 *xyz);            //osoto add
-    bool SampFracCheck();                         // inline //osoto add 
 
 private:
     const Double_t kEbeam;    // The energy of incoming electron beam
